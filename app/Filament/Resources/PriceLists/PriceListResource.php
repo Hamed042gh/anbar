@@ -48,8 +48,6 @@ class PriceListResource extends Resource
     {
         return [
             'index' => ListPriceLists::route('/'),
-            'create' => CreatePriceList::route('/create'),
-            'edit' => EditPriceList::route('/{record}/edit'),
         ];
     }
 }

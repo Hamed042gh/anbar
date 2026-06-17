@@ -40,8 +40,6 @@ class PurchaseReceiptItemResource extends Resource
     {
         return [
             'index' => ListPurchaseReceiptItems::route('/'),
-            'create' => CreatePurchaseReceiptItem::route('/create'),
-            'edit' => EditPurchaseReceiptItem::route('/{record}/edit'),
         ];
     }
 }

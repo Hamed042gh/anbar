@@ -40,8 +40,6 @@ class ProductAttributeValueResource extends Resource
     {
         return [
             'index' => ListProductAttributeValues::route('/'),
-            'create' => CreateProductAttributeValue::route('/create'),
-            'edit' => EditProductAttributeValue::route('/{record}/edit'),
         ];
     }
 }

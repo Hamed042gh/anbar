@@ -24,6 +24,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Enums\Width;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -50,6 +51,10 @@ class AdminPanelProvider extends PanelProvider
                 'info' => Color::Blue,
                 'gray' => Color::Slate,
             ])
+            ->databaseNotifications()
+             ->maxContentWidth(Width::Full)
+              ->unsavedChangesAlerts()
+              ->databaseTransactions()
 
             ->darkMode(true)
               ->viteTheme('resources/css/filament/admin/theme.css')

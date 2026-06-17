@@ -47,8 +47,6 @@ class InventoryCheckResource extends Resource
     {
         return [
             'index' => ListInventoryChecks::route('/'),
-            'create' => CreateInventoryCheck::route('/create'),
-            'edit' => EditInventoryCheck::route('/{record}/edit'),
         ];
     }
 }

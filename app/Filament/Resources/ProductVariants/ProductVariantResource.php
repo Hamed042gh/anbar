@@ -47,8 +47,6 @@ class ProductVariantResource extends Resource
     {
         return [
             'index' => ListProductVariants::route('/'),
-            'create' => CreateProductVariant::route('/create'),
-            'edit' => EditProductVariant::route('/{record}/edit'),
         ];
     }
 

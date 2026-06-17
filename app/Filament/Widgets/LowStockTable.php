@@ -21,11 +21,42 @@ class LowStockTable extends TableWidget
                     ->with(['variant.product', 'warehouse'])
                     ->select('inventories.*')
             )
+            ->paginated(false)
+            ->striped()
+            ->heading('🔴 کالاهای رو به اتمام')
             ->columns([
-                TextColumn::make('variant.product.name')->label('کالا'),
-                TextColumn::make('variant.sku')->label('تنوع/SKU'),
-                TextColumn::make('warehouse.name')->label('انبار'),
-                TextColumn::make('quantity')->label('موجودی')->badge()->color('danger'),
+                TextColumn::make('variant.product.name')
+                    ->label('کالا')
+                    ->weight('bold')
+                    ->icon('heroicon-m-cube')
+                    ->iconColor('gray')
+                    ->searchable(),
+
+                TextColumn::make('variant.sku')
+                    ->label('SKU')
+                    ->badge()
+                    ->color('gray')
+                    ->copyable()
+                    ->copyMessage('کپی شد'),
+
+                TextColumn::make('warehouse.name')
+                    ->label('انبار')
+                    ->icon('heroicon-m-building-office')
+                    ->iconColor('info'),
+
+                TextColumn::make('quantity')
+                    ->label('موجودی فعلی')
+                    ->badge()
+                    ->color(fn($state) => $state <= 0 ? 'danger' : 'warning')
+                    ->formatStateUsing(fn($state) => $state <= 0 ? '🚨 صفر' : $state . ' عدد')
+                    ->alignCenter(),
+
+                TextColumn::make('variant.reorder_level')
+                    ->label('حداقل موجودی')
+                    ->badge()
+                    ->color('gray')
+                    ->suffix(' عدد')
+                    ->alignCenter(),
             ]);
     }
 }

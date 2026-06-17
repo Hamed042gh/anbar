@@ -50,8 +50,6 @@ class SupplierResource extends Resource
     {
         return [
             'index' => ListSuppliers::route('/'),
-            'create' => CreateSupplier::route('/create'),
-            'edit' => EditSupplier::route('/{record}/edit'),
         ];
     }
 

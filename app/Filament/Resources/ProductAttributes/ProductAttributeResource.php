@@ -47,8 +47,6 @@ class ProductAttributeResource extends Resource
     {
         return [
             'index' => ListProductAttributes::route('/'),
-            'create' => CreateProductAttribute::route('/create'),
-            'edit' => EditProductAttribute::route('/{record}/edit'),
         ];
     }
 }

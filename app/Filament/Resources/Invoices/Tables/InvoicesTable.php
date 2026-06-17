@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Invoices\Tables;
 
+use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -10,6 +13,7 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Spatie\Browsershot\Browsershot;
 
 class InvoicesTable
 {
@@ -65,6 +69,25 @@ class InvoicesTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('pdf')
+                    ->label('چاپ PDF')
+                    ->icon('heroicon-o-printer')
+                    ->color('gray')
+                    ->action(function (Invoice $record) {
+                        $record->load(['customer', 'warehouse', 'user', 'items.variant.product']);
+                        
+                        $html = view('pdf.invoice', ['invoice' => $record])->render();
+                        
+                        $pdf = Browsershot::html($html)
+                            ->format('A4')
+                            ->margins(10, 10, 10, 10)
+                            ->pdf();
+
+                        return response()->streamDownload(
+                            fn() => print($pdf),
+                            'invoice-' . $record->number . '.pdf'
+                        );
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

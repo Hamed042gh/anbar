@@ -43,8 +43,6 @@ class PurchaseOrderItemResource extends Resource
     {
         return [
             'index' => ListPurchaseOrderItems::route('/'),
-            'create' => CreatePurchaseOrderItem::route('/create'),
-            'edit' => EditPurchaseOrderItem::route('/{record}/edit'),
         ];
     }
 }

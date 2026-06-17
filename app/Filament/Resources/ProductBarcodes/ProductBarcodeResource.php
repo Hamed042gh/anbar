@@ -40,8 +40,6 @@ class ProductBarcodeResource extends Resource
     {
         return [
             'index' => ListProductBarcodes::route('/'),
-            'create' => CreateProductBarcode::route('/create'),
-            'edit' => EditProductBarcode::route('/{record}/edit'),
         ];
     }
 }

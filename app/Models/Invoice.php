@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Invoice extends Model
 {
     use SoftDeletes;
+    use HasActivityLog;
 
     protected $fillable = [
         'number', 'customer_id', 'warehouse_id', 'user_id', 'price_list_id',

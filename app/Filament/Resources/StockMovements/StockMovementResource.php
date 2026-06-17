@@ -48,8 +48,6 @@ class StockMovementResource extends Resource
     {
         return [
             'index' => ListStockMovements::route('/'),
-            'create' => CreateStockMovement::route('/create'),
-            'edit' => EditStockMovement::route('/{record}/edit'),
         ];
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Concerns\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Inventory extends Model
 {
+    use HasActivityLog;
     protected $fillable = ['variant_id', 'warehouse_id', 'location_id', 'quantity', 'avg_cost'];
 
     protected $casts = [
@@ -28,4 +30,5 @@ class Inventory extends Model
     {
         return $this->belongsTo(WarehouseLocation::class, 'location_id');
     }
+
 }

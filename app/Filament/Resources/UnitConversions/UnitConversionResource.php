@@ -40,8 +40,6 @@ class UnitConversionResource extends Resource
     {
         return [
             'index' => ListUnitConversions::route('/'),
-            'create' => CreateUnitConversion::route('/create'),
-            'edit' => EditUnitConversion::route('/{record}/edit'),
         ];
     }
 }

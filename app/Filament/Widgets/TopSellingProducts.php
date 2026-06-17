@@ -22,6 +22,7 @@ class TopSellingProducts extends TableWidget
                     ->join('invoice_items', 'invoice_items.variant_id', '=', 'product_variants.id')
                     ->join('invoices', 'invoices.id', '=', 'invoice_items.invoice_id')
                     ->where('invoices.issued_at', '>=', now()->subDays(7))
+                    ->where('invoices.status', 'confirmed')
                     ->groupBy('products.id', 'products.name')
                     ->select(
                         'products.id',
@@ -33,11 +34,27 @@ class TopSellingProducts extends TableWidget
                     ->limit(5)
             )
             ->paginated(false)
+            ->striped()
             ->columns([
-                TextColumn::make('product_name')->label('کالا')->weight('bold'),
-                TextColumn::make('total_quantity')->label('تعداد فروش')->badge()->color('success'),
-                TextColumn::make('total_revenue')->label('درآمد')
-                    ->formatStateUsing(fn ($state) => number_format($state) . ' تومان'),
+                TextColumn::make('product_name')
+                    ->label('کالا')
+                    ->weight('bold')
+                    ->icon('heroicon-m-cube')
+                    ->iconColor('primary'),
+
+                TextColumn::make('total_quantity')
+                    ->label('تعداد فروش')
+                    ->badge()
+                    ->color('success')
+                    ->suffix(' عدد')
+                    ->alignCenter(),
+
+                TextColumn::make('total_revenue')
+                    ->label('درآمد')
+                    ->formatStateUsing(fn($state) => number_format($state) . ' تومان')
+                    ->color('warning')
+                    ->weight('bold')
+                    ->alignEnd(),
             ]);
     }
 }
