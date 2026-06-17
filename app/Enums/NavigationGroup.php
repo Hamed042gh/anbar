@@ -14,6 +14,7 @@ enum NavigationGroup implements HasLabel, HasIcon
     case Warehouse;
     case Purchase;
     case Sales;
+    case User;
     case Settings;
 
     public function getLabel(): string
@@ -23,6 +24,7 @@ enum NavigationGroup implements HasLabel, HasIcon
             self::Warehouse => 'انبار',
             self::Purchase  => 'خرید',
             self::Sales     => 'فروش',
+            self::User     => 'مدیریت کاربران',
             self::Settings  => 'تنظیمات',
         };
     }
@@ -34,6 +36,7 @@ enum NavigationGroup implements HasLabel, HasIcon
             self::Warehouse => Heroicon::OutlinedBuildingStorefront,
             self::Purchase  => Heroicon::OutlinedTruck,
             self::Sales     => Heroicon::OutlinedDocumentCurrencyDollar,
+            self::User => Heroicon::OutlinedUserGroup,
             self::Settings  => Heroicon::OutlinedCog6Tooth,
         };
     }

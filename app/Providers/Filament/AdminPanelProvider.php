@@ -4,6 +4,11 @@ namespace App\Providers\Filament;
 
 
 use App\Filament\Pages\EditProfile;
+use App\Filament\Widgets\DashboardStats;
+use App\Filament\Widgets\LowStockTable;
+use App\Filament\Widgets\MonthlySalesGoal;
+use App\Filament\Widgets\RecentActivity;
+use App\Filament\Widgets\StockMovementChart;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;

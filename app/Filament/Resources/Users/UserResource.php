@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Resources\Users\Pages\ListUsers;
 use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Tables\UsersTable;
@@ -11,22 +12,21 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+
+    protected static string | UnitEnum | null $navigationGroup = NavigationGroup::User;
+    protected static ?string $modelLabel = 'کاربران';
+    protected static ?string $pluralModelLabel = 'کاربران';
+    protected static ?string $navigationLabel = 'کاربران';
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationLabel = 'کاربران';
-
-    protected static ?string $modelLabel = 'کاربر';
-
-    protected static ?string $pluralModelLabel = 'کاربران';
-
-    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {
@@ -50,8 +50,8 @@ class UserResource extends Resource
         ];
     }
 
-    public static function getNavigationGroup(): ?string
-    {
-        return 'مدیریت کاربران';
-    }
+    // public static function getNavigationGroup(): ?string
+    // {
+    //     return 'مدیریت کاربران';
+    // }
 }
