@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Suppliers;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\Suppliers\Pages\CreateSupplier;
 use App\Filament\Resources\Suppliers\Pages\EditSupplier;
 use App\Filament\Resources\Suppliers\Pages\ListSuppliers;
@@ -20,6 +21,7 @@ use UnitEnum;
 
 class SupplierResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = Supplier::class;
 
     protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Purchase;

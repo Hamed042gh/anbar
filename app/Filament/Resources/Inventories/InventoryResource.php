@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Inventories;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\Inventories\Pages\CreateInventory;
 use App\Filament\Resources\Inventories\Pages\EditInventory;
 use App\Filament\Resources\Inventories\Pages\ListInventories;
@@ -18,6 +19,7 @@ use UnitEnum;
 
 class InventoryResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = Inventory::class;
 
     protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Warehouse;
@@ -48,4 +50,5 @@ class InventoryResource extends Resource
             'index' => ListInventories::route('/'),
         ];
     }
+
 }
