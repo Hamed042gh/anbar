@@ -9,7 +9,7 @@ use App\Notifications\LowStockNotification;
 class CheckLowStock extends Command
 {
     protected $signature = 'stock:check-low';
-    protected $description = 'بررسی موجودی کم و ارسال نوتیف';
+    protected $description = 'Check low stock items and notify admins';
 
     public function handle(): void
     {
@@ -21,7 +21,7 @@ class CheckLowStock extends Command
             ->get();
 
         if ($lowStockItems->isEmpty()) {
-            $this->info('همه موجودی‌ها کافیست.');
+            $this->info('All stock levels are sufficient.');
             return;
         }
 
@@ -33,6 +33,6 @@ class CheckLowStock extends Command
             }
         }
 
-        $this->info("نوتیف برای {$lowStockItems->count()} کالا ارسال شد.");
+        $this->info("Notifications sent for {$lowStockItems->count()} item(s).");
     }
 }
