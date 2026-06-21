@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 
+use App\Enums\NavigationGroup;
 use App\Filament\Pages\EditProfile;
 use App\Filament\Pages\Settings;
 use App\Filament\Widgets\DashboardStats;
@@ -47,9 +48,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->registration()
             ->profile(EditProfile::class)
             ->spa()
-             ->topNavigation()
+            ->topNavigation()
             ->globalSearchDebounce('500ms')
             
             ->colors([
