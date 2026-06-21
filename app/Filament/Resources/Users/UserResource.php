@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\Users\Pages\ListUsers;
 use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Tables\UsersTable;
@@ -16,6 +17,7 @@ use UnitEnum;
 
 class UserResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = User::class;
 
 
@@ -50,8 +52,4 @@ class UserResource extends Resource
         ];
     }
 
-    // public static function getNavigationGroup(): ?string
-    // {
-    //     return 'مدیریت کاربران';
-    // }
 }

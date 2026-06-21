@@ -226,7 +226,7 @@
                         <tr>
                             <td><div class="monogram">س</div></td>
                             <td class="brand-text">
-                                <div class="logo-title">سیستم انبارداری</div>
+                              <div class="logo-title">{{ \App\Models\Setting::get('company_name', 'سیستم انبارداری') }}</div>
                                 <div class="logo-sub">نرم‌افزار مدیریت انبار و فروش</div>
                             </td>
                         </tr>
@@ -355,7 +355,7 @@
                 </td>
             </tr>
         </table>
-        <div class="legal-note">این فاکتور به صورت سیستمی صادر شده و بدون مهر و امضا فاقد ارزش رسمی است</div>
+        <div class="legal-note">{{ \App\Models\Setting::get('invoice_footer_text', 'این فاکتور به صورت سیستمی صادر شده و بدون مهر و امضا فاقد ارزش رسمی است') }}</div>
     </div>
 
 </div>

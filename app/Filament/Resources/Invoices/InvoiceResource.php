@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Invoices;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\Invoices\Pages\CreateInvoice;
 use App\Filament\Resources\Invoices\Pages\EditInvoice;
 use App\Filament\Resources\Invoices\Pages\ListInvoices;
@@ -21,6 +22,7 @@ use UnitEnum;
 
 class InvoiceResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = Invoice::class;
 
     protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Sales;
@@ -59,4 +61,5 @@ class InvoiceResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
 }
