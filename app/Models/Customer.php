@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\City;
+use App\Models\Province;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,5 +37,15 @@ class Customer extends Model
     public function hasCredit(float $amount): bool
     {
         return ($this->balance + $amount) <= $this->credit_limit;
+    }
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }

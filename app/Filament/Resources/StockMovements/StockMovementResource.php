@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\StockMovements;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\StockMovements\Pages\CreateStockMovement;
 use App\Filament\Resources\StockMovements\Pages\EditStockMovement;
 use App\Filament\Resources\StockMovements\Pages\ListStockMovements;
@@ -18,6 +19,7 @@ use UnitEnum;
 
 class StockMovementResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = StockMovement::class;
 
     protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Warehouse;

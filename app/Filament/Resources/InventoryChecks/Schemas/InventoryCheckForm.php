@@ -20,12 +20,17 @@ class InventoryCheckForm
                     ->relationship('user', 'name')
                     ->required(),
                 Select::make('status')
-                    ->options(['draft' => 'Draft', 'in_progress' => 'In progress', 'completed' => 'Completed'])
+                    ->options([
+                        'draft' => 'پیش‌نویس',
+                        'in_progress' => 'در حال انجام',
+                        'completed' => 'تکمیل شده',
+                    ])
                     ->default('draft')
                     ->required(),
                 Textarea::make('note')
                     ->columnSpanFull(),
-                DateTimePicker::make('checked_at'),
+                DateTimePicker::make('checked_at')
+                    ->jalali(),
             ]);
     }
 }

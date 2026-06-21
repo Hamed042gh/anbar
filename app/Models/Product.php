@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model  implements HasMedia
 {
     use SoftDeletes;
     use HasActivityLog;
+     use InteractsWithMedia;
 
     protected $fillable = [
         'category_id', 'unit_id', 'name', 'sku',
@@ -54,5 +57,11 @@ class Product extends Model
     public function isManufactured(): bool
     {
         return $this->type === 'manufactured';
+    }
+
+    public function registerMediaCollections(): void
+    {
+        // $this->addMediaCollection('featured')->singleFile();
+        $this->addMediaCollection('gallery');
     }
 }

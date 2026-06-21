@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\SelectFilter;
 
 class CustomersTable
 {
@@ -56,6 +57,12 @@ class CustomersTable
                     ->dateTime('Y/m/d')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('province.name')
+                    ->label('استان')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('city.name')
+                    ->label('شهر')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 TernaryFilter::make('is_active')
@@ -63,6 +70,16 @@ class CustomersTable
                     ->trueLabel('فعال')
                     ->falseLabel('غیرفعال')
                     ->placeholder('همه'),
+                SelectFilter::make('province_id')
+                    ->label('استان')
+                    ->relationship('province', 'name')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('city_id')
+                    ->label('شهر')
+                    ->relationship('city', 'name')
+                    ->searchable()
+                    ->preload(),
                 TrashedFilter::make(),
             ])
             ->recordActions([

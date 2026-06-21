@@ -20,7 +20,6 @@ use UnitEnum;
 class UnitResource extends Resource
 {
     protected static ?string $model = Unit::class;
-
     protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Settings;
     protected static ?string $modelLabel = 'یکای اندازه';
     protected static ?string $pluralModelLabel = 'یکاهای اندازه';

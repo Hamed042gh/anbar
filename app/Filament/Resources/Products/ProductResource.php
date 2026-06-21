@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Products;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
@@ -22,6 +23,7 @@ use UnitEnum;
 
 class ProductResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = Product::class;
     protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Products;
     protected static ?string $modelLabel = 'محصول';
@@ -60,4 +62,5 @@ class ProductResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
 }

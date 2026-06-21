@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Categories;
 
 use App\Enums\NavigationGroup;
+use App\Filament\Concerns\HasCachedNavigationBadge;
 use App\Filament\Resources\Categories\Pages\CreateCategory;
 use App\Filament\Resources\Categories\Pages\EditCategory;
 use App\Filament\Resources\Categories\Pages\ListCategories;
@@ -18,9 +19,10 @@ use UnitEnum;
 
 class CategoryResource extends Resource
 {
+    use HasCachedNavigationBadge;
     protected static ?string $model = Category::class;
 
-   protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Products;
+    protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Products;
     protected static ?string $modelLabel = 'دسته‌بندی';
     protected static ?string $pluralModelLabel = 'دسته‌بندی‌ها';
     protected static ?string $navigationLabel = 'دسته‌بندی‌ها';
