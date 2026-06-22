@@ -4,8 +4,9 @@ namespace App\Services\Dashboard;
 
 use App\Models\{Inventory, PurchaseOrder, Invoice};
 use App\Services\Dashboard\Data\DashboardStatsData;
-use Illuminate\Support\Facades\{DB, Cache};
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\{DB, Cache};
+use Illuminate\Support\Facades\Log;
 
 class DashboardStatsService
 {
@@ -22,7 +23,7 @@ public function get(): DashboardStatsData
 
         return new DashboardStatsData(...$data);
     } catch (\Throwable $e) {
-        \Log::error('DashboardStats failed: ' . $e->getMessage(), ['exception' => $e]);
+        Log::error('DashboardStats failed: ' . $e->getMessage(), ['exception' => $e]);
         throw $e;
     }
 }

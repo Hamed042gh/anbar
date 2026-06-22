@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class TopSellingProducts extends TableWidget
 {
     protected static ?string $heading = 'پرفروش‌ترین کالاهای این هفته';
-    protected int|string|array $columnSpan = 1;
+    protected int|string|array $columnSpan = 2;
     protected static ?int $sort = 2;
     public function table(Table $table): Table
     {
