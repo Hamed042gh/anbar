@@ -1,34 +1,4 @@
 <x-filament-widgets::widget>
-    <script>
-    Alpine.data('counter', (target, decimals = 0) => ({
-        value: 0,
-        init() {
-            const duration = 900;
-            const start = performance.now();
-            const to = target;
-            const step = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                this.value = to * eased;
-                if (progress < 1) requestAnimationFrame(step);
-                else this.value = to;
-            };
-            requestAnimationFrame(step);
-        },
-        toFa(str) {
-            const fa = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-            return str.replace(/[0-9]/g, d => fa[d]);
-        },
-        formatted() {
-            const str = this.value.toLocaleString('en-US', {
-                maximumFractionDigits: decimals,
-                minimumFractionDigits: decimals,
-            });
-            return this.toFa(str);
-        },
-    }));
-    </script>
-
     <x-filament::section>
         <div dir="rtl" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
@@ -53,10 +23,9 @@
                             class="{{ $growth >= 0 ? 'stroke-success-500' : 'stroke-danger-500' }} transition-all duration-700" />
                     </svg>
                     <div>
-                        <p class="text-2xl font-bold tracking-tight" x-data="counter({{ $stats->inventoryValue }})" x-text="formatted()"></p>
-                        <p class="text-xs font-medium {{ $growth >= 0 ? 'text-success-600' : 'text-danger-600' }} mt-0.5"
-                           x-data="counter({{ $growth }}, 1)">
-                            <span x-text="(value >= 0 ? '+' : '') + formatted()"></span>٪ نسبت به دیروز
+                        <p class="text-2xl font-bold tracking-tight">{{ fa_number($stats->inventoryValue) }}</p>
+                        <p class="text-xs font-medium {{ $growth >= 0 ? 'text-success-600' : 'text-danger-600' }} mt-0.5">
+                            {{ $growth >= 0 ? '+' : '' }}{{ fa_number($growth, 1) }}٪ نسبت به دیروز
                         </p>
                     </div>
                 </div>
@@ -79,7 +48,7 @@
                 </svg>
                 <div class="relative flex items-baseline justify-between">
                     <p class="text-2xl font-bold tracking-tight">
-                        <span x-data="counter({{ $stats->lowStockCount }})" x-text="formatted()"></span>
+                        {{ fa_number($stats->lowStockCount) }}
                         <span class="text-sm font-medium text-gray-400">قلم</span>
                     </p>
                     <span class="text-xs font-medium {{ $stats->lowStockCount > 0 ? 'text-danger-600' : 'text-success-600' }}">
@@ -97,14 +66,14 @@
                         <x-heroicon-o-truck class="w-5 h-5 text-info-500" />
                     </div>
                 </div>
-                <p class="relative text-2xl font-bold tracking-tight">
-                    <span x-data="counter({{ $stats->pendingOrdersCount }})" x-text="formatted()"></span>
-                    <span class="text-sm font-medium text-gray-400">سفارش</span>
-                </p>
                 @php
                     $b = $stats->pendingByStatus;
                     $total = max(array_sum($b), 1);
                 @endphp
+                <p class="relative text-2xl font-bold tracking-tight">
+                    {{ fa_number($stats->pendingOrdersCount) }}
+                    <span class="text-sm font-medium text-gray-400">سفارش</span>
+                </p>
                 <div class="relative flex h-2 rounded-full overflow-hidden bg-gray-100 dark:bg-white/10">
                     <div class="bg-info-500 transition-all duration-700" style="width: {{ ($b['sent'] ?? 0) / $total * 100 }}%"></div>
                     <div class="bg-info-300 transition-all duration-700" style="width: {{ ($b['draft'] ?? 0) / $total * 100 }}%"></div>
@@ -127,7 +96,7 @@
                     </div>
                 </div>
                 <p class="relative text-2xl font-bold tracking-tight">
-                    <span x-data="counter({{ $stats->todayInvoiceCount }})" x-text="formatted()"></span>
+                    {{ fa_number($stats->todayInvoiceCount) }}
                     <span class="text-sm font-medium text-gray-400">فاکتور</span>
                 </p>
                 <div class="relative flex items-end gap-3" style="height: 44px;">
@@ -145,9 +114,8 @@
                     </div>
                 </div>
                 @if($stats->salesTrendPercent !== null)
-                    <span class="relative text-xs font-medium {{ $stats->salesTrendPercent >= 0 ? 'text-success-600' : 'text-danger-600' }}"
-                          x-data="counter({{ $stats->salesTrendPercent }}, 1)">
-                        <span x-text="(value >= 0 ? '+' : '') + formatted()"></span>٪ رشد
+                    <span class="relative text-xs font-medium {{ $stats->salesTrendPercent >= 0 ? 'text-success-600' : 'text-danger-600' }}">
+                        {{ $stats->salesTrendPercent >= 0 ? '+' : '' }}{{ fa_number($stats->salesTrendPercent, 1) }}٪ رشد
                     </span>
                 @endif
             </div>

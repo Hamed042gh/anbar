@@ -10,46 +10,50 @@
             </div>
         </x-slot>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="flex flex-col divide-y divide-gray-100 dark:divide-white/5">
             @forelse ($this->getActivities() as $activity)
-                <div class="rounded-2xl bg-gray-50 dark:bg-white/5 ring-1 ring-gray-950/5 dark:ring-white/10 p-5 flex flex-col gap-2 hover:ring-gray-950/10 dark:hover:ring-white/20 transition min-h-[148px]">
+                <div class="flex items-center gap-3 py-3 first:pt-0 last:pb-0 group">
 
-                    <div class="flex items-center justify-between">
-                        <div @class([
-                            'flex items-center justify-center w-9 h-9 rounded-xl shrink-0',
-                            'bg-success-100 dark:bg-success-900/40 text-success-600 dark:text-success-400' => $activity['color'] === 'success',
-                            'bg-danger-100 dark:bg-danger-900/40 text-danger-600 dark:text-danger-400'   => $activity['color'] === 'danger',
-                            'bg-warning-100 dark:bg-warning-900/40 text-warning-600 dark:text-warning-400' => $activity['color'] === 'warning',
-                            'bg-info-100 dark:bg-info-900/40 text-info-600 dark:text-info-400'           => $activity['color'] === 'info',
-                            'bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' => $activity['color'] === 'primary',
-                        ])>
-                            <x-filament::icon :icon="$activity['icon']" class="w-4 h-4" />
-                        </div>
-                        <span class="text-[11px] text-gray-400 dark:text-gray-500 whitespace-nowrap">
-                            {{ $activity['time']->diffForHumans() }}
-                        </span>
+                    {{-- آیکون --}}
+                    <div @class([
+                        'flex items-center justify-center w-8 h-8 rounded-lg shrink-0 transition',
+                        'bg-success-50 dark:bg-success-900/30 text-success-500 dark:text-success-400' => $activity['color'] === 'success',
+                        'bg-danger-50 dark:bg-danger-900/30 text-danger-500 dark:text-danger-400'     => $activity['color'] === 'danger',
+                        'bg-warning-50 dark:bg-warning-900/30 text-warning-500 dark:text-warning-400' => $activity['color'] === 'warning',
+                        'bg-info-50 dark:bg-info-900/30 text-info-500 dark:text-info-400'             => $activity['color'] === 'info',
+                        'bg-primary-50 dark:bg-primary-900/30 text-primary-500 dark:text-primary-400' => $activity['color'] === 'primary',
+                    ])>
+                        <x-filament::icon :icon="$activity['icon']" class="w-4 h-4" />
                     </div>
 
-                    <p @class([
-                        'text-[11px] font-semibold tracking-wide mt-1',
-                        'text-success-600 dark:text-success-400' => $activity['color'] === 'success',
-                        'text-danger-600 dark:text-danger-400'   => $activity['color'] === 'danger',
-                        'text-warning-600 dark:text-warning-400' => $activity['color'] === 'warning',
-                        'text-info-600 dark:text-info-400'       => $activity['color'] === 'info',
-                        'text-primary-600 dark:text-primary-400' => $activity['color'] === 'primary',
-                    ])>
-                        {{ $activity['label'] }}
-                    </p>
-                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100 line-clamp-2">
-                        {{ $activity['text'] }}
-                    </p>
+                    {{-- متن --}}
+                    <div class="flex-1 min-w-0">
+                        <p @class([
+                            'text-[11px] font-semibold leading-none mb-1',
+                            'text-success-600 dark:text-success-400' => $activity['color'] === 'success',
+                            'text-danger-600 dark:text-danger-400'   => $activity['color'] === 'danger',
+                            'text-warning-600 dark:text-warning-400' => $activity['color'] === 'warning',
+                            'text-info-600 dark:text-info-400'       => $activity['color'] === 'info',
+                            'text-primary-600 dark:text-primary-400' => $activity['color'] === 'primary',
+                        ])>{{ $activity['label'] }}</p>
+                        <p class="text-sm text-gray-700 dark:text-gray-200 truncate">
+                            {{ $activity['text'] }}
+                        </p>
+                    </div>
+
+                    {{-- زمان --}}
+                    <span class="text-[11px] text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
+                        {{ $activity['time']->diffForHumans() }}
+                    </span>
+
                 </div>
             @empty
-                <div class="col-span-full py-10 text-center text-sm text-gray-400">
+                <div class="py-10 text-center text-sm text-gray-400">
                     <x-filament::icon icon="heroicon-o-inbox" class="w-9 h-9 mx-auto mb-2 opacity-30" />
                     فعالیتی ثبت نشده
                 </div>
             @endforelse
         </div>
+
     </x-filament::section>
 </x-filament-widgets::widget>
