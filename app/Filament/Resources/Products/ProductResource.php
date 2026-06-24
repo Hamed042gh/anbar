@@ -12,7 +12,6 @@ use App\Filament\Resources\Products\RelationManagers\VariantsRelationManager;
 use App\Filament\Resources\Products\Schemas\ProductForm;
 use App\Filament\Resources\Products\Tables\ProductsTable;
 use App\Models\Product;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -25,7 +24,7 @@ class ProductResource extends Resource
 {
     use HasCachedNavigationBadge;
     protected static ?string $model = Product::class;
-    protected static string | UnitEnum | null $navigationGroup = NavigationGroup::Products;
+    protected static UnitEnum | string | null $navigationGroup = NavigationGroup::Products;
     protected static ?string $modelLabel = 'محصول';
     protected static ?string $pluralModelLabel = 'محصولات';
     protected static ?string $navigationLabel = 'محصولات';

@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
             ->spa()
             ->topNavigation()
             ->globalSearchDebounce('500ms')
-            
+
             ->colors([
                 'success' => Color::Emerald,
                 'danger' => Color::Rose,
@@ -70,7 +70,7 @@ class AdminPanelProvider extends PanelProvider
               ->viteTheme('resources/css/filament/admin/theme.css')
 
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-      
+
 
             ->pages([
                 Dashboard::class,
