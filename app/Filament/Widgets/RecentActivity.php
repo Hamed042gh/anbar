@@ -10,7 +10,7 @@ class RecentActivity extends Widget
 {
     protected string $view = 'filament.widgets.recent-activity';
     protected ?string $pollingInterval = '15s';
-    protected int|string|array $columnSpan = 1;
+    protected int|string|array $columnSpan = 2;
     protected static ?int $sort = 3;
 
     public function getActivities(): Collection
@@ -50,7 +50,7 @@ class RecentActivity extends Widget
             ]);
 
         $invoices = Invoice::latest('issued_at')
-            ->limit(8)
+            ->limit(12)
             ->get()
             ->map(fn($i) => [
                 'icon'  => match($i->status) {
@@ -70,7 +70,7 @@ class RecentActivity extends Widget
 
         return $movements->concat($invoices)
             ->sortByDesc('time')
-            ->take(10)
+            ->take(15)
             ->values();
     }
 }

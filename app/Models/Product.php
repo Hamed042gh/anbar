@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Concerns\HasActivityLog;
+use App\Models\ProductBarcode;
+use App\Models\ProductVariant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -63,5 +66,15 @@ class Product extends Model  implements HasMedia
     {
         // $this->addMediaCollection('featured')->singleFile();
         $this->addMediaCollection('gallery');
+    }
+
+    public function barcodes(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            ProductBarcode::class,
+            ProductVariant::class,
+            'product_id',
+            'variant_id', 
+        );
     }
 }
